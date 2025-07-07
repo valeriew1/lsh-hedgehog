@@ -8,6 +8,7 @@ public class PlayerJumpSC : MonoBehaviour
     [SerializeField] private float jumpForce = 5.0f;
 
     Rigidbody2D rb;
+    private bool shouldJump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,14 +19,19 @@ public class PlayerJumpSC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            shouldJump = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        //if (Input.GetMouseButtonDown())
-        if (Input.GetMouseButtonDown(0))
+        if (shouldJump)
+        {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            shouldJump = false;
+        }
     }
 
     
